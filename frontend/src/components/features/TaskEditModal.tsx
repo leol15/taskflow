@@ -101,6 +101,7 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
                   importance={importance} setImportance={setImportance}
                   effort={effort} setEffort={setEffort}
                   urgency={urgency} setUrgency={setUrgency}
+                  defaultExpanded
                 />
 
                 <div className={styles.timestamps}>

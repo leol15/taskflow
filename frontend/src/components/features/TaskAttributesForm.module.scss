@@ -1,21 +1,49 @@
 .attributes {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
+// Attribute group: label stacked above the button group for clean left-alignment
 .attributeGroup {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
 
   label {
-    font-size: 11px;
+    font-size: 10px;
+    color: var(--text-tertiary);
+    // Title case instead of all-caps; lighter weight so labels recede
+    text-transform: none;
+    letter-spacing: 0.2px;
+    font-weight: 500;
+  }
+}
+
+// Container for the three advanced axes so they share consistent spacing
+.extendedAttributes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+// "More options" / "Fewer options" toggle
+.moreToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: inherit;
+  transition: color var(--transition-fast);
+
+  &:hover {
     color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
   }
 }
