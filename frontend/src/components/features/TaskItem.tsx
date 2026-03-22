@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, Circle, MoreHorizontal } from "lucide-react";
+import { Check, Square, MoreHorizontal } from "lucide-react";
 import { Task } from "../../types/task";
 import { useTasks } from "../../context/TaskContext";
 import styles from "./TaskItem.module.scss";
@@ -16,6 +16,13 @@ interface TaskItemProps {
 export function TaskItem({ task, onEdit }: TaskItemProps) {
   const { toggleTask } = useTasks();
 
+  const importanceKey = task.importance.replace(' do', '');
+  const itemStyle = {
+    '--item-color': task.completed 
+      ? 'var(--text-tertiary)' 
+      : `var(--color-importance-${importanceKey})`
+  } as React.CSSProperties;
+
   return (
     <motion.div
       layout
@@ -25,9 +32,10 @@ export function TaskItem({ task, onEdit }: TaskItemProps) {
       whileHover={{ scale: 1.01 }}
       className={clsx(styles.item, { [styles.completed]: task.completed })}
       onClick={() => toggleTask(task.id)}
+      style={itemStyle}
     >
       <button className={styles.checkbox}>
-        {task.completed ? <Check size={16} className={styles.checkIcon} /> : <Circle size={16} className={styles.circleIcon} />}
+        {task.completed ? <Check size={14} className={styles.checkIcon} /> : <Square size={14} className={styles.squareIcon} />}
       </button>
       
       <div className={styles.content}>

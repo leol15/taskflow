@@ -14,6 +14,33 @@ const IMPORTANCES: readonly Importance[] = ["must do", "should do", "can do"];
 const EFFORTS: readonly Effort[] = ["<10 min", "30 min", "2 hours", "unknown"];
 const URGENCIES: readonly Urgency[] = ["Immediate", "Today", "This Week", "Eventually"];
 
+const CATEGORY_COLORS = {
+  "task": "--color-category-task",
+  "idea": "--color-category-idea",
+  "reminder": "--color-category-reminder",
+  "note": "--color-category-note",
+};
+
+const IMPORTANCE_COLORS = {
+  "must do": "--color-importance-must",
+  "should do": "--color-importance-should",
+  "can do": "--color-importance-can",
+};
+
+const EFFORT_COLORS = {
+  "<10 min": "--color-effort-quick",
+  "30 min": "--color-effort-medium",
+  "2 hours": "--color-effort-long",
+  "unknown": "--color-effort-unknown",
+};
+
+const URGENCY_COLORS = {
+  "Immediate": "--color-importance-must",
+  "Today": "--color-importance-should",
+  "This Week": "--color-category-task",
+  "Eventually": "--color-effort-unknown",
+};
+
 interface TaskEditModalProps {
   task: Task | null;
   isOpen: boolean;
@@ -96,19 +123,19 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
                 <div className={styles.attributes}>
                   <div className={styles.attributeGroup}>
                     <label>Category</label>
-                    <ButtonGroup options={CATEGORIES} value={category} onChange={setCategory} />
+                    <ButtonGroup options={CATEGORIES} value={category} onChange={setCategory} colorMap={CATEGORY_COLORS} />
                   </div>
                   <div className={styles.attributeGroup}>
                     <label>Importance</label>
-                    <ButtonGroup options={IMPORTANCES} value={importance} onChange={setImportance} />
+                    <ButtonGroup options={IMPORTANCES} value={importance} onChange={setImportance} colorMap={IMPORTANCE_COLORS} />
                   </div>
                   <div className={styles.attributeGroup}>
                     <label>Effort</label>
-                    <ButtonGroup options={EFFORTS} value={effort} onChange={setEffort} />
+                    <ButtonGroup options={EFFORTS} value={effort} onChange={setEffort} colorMap={EFFORT_COLORS} />
                   </div>
                   <div className={styles.attributeGroup}>
                     <label>Urgency</label>
-                    <ButtonGroup options={URGENCIES} value={urgency} onChange={setUrgency} />
+                    <ButtonGroup options={URGENCIES} value={urgency} onChange={setUrgency} colorMap={URGENCY_COLORS} />
                   </div>
                 </div>
 

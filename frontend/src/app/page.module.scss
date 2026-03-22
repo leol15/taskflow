@@ -9,19 +9,7 @@
 }
 
 .backgroundGlow {
-  position: fixed;
-  top: -10vw;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80vw;
-  max-width: 800px;
-  height: 60vw;
-  max-height: 600px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(168, 85, 247, 0.08) 40%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(80px);
+  display: none; // No soft glows in minimalist tech design
 }
 
 .container {
@@ -53,13 +41,13 @@
 }
 
 .title {
-  font-family: var(--font-outfit), sans-serif;
-  font-size: 36px;
+  font-family: var(--font-mono), monospace;
+  font-size: 32px;
   font-weight: 700;
   margin: 0;
-  background: linear-gradient(135deg, var(--text-primary), var(--text-tertiary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-primary);
 }
 
 .subtitle {
@@ -72,11 +60,10 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: 32px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 40px;
   box-shadow: var(--shadow-md);
+  position: relative;
 }

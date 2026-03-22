@@ -21,8 +21,9 @@
   }
 
   &.active {
-    background: var(--text-primary);
-    color: var(--bg-primary);
-    border-color: var(--text-primary);
+    background: color-mix(in srgb, var(--active-color, var(--text-primary)) 15%, transparent);
+    color: var(--active-color, var(--text-primary));
+    border-color: color-mix(in srgb, var(--active-color, var(--text-primary)) 60%, transparent);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--active-color, var(--text-primary)) 15%, transparent);
   }
 }

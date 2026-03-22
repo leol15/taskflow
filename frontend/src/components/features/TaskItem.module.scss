@@ -1,25 +1,32 @@
 .item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 16px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
   cursor: pointer;
+  border-radius: var(--radius-sm); // sharp corners
   transition: all var(--transition-fast);
-  box-shadow: var(--shadow-sm);
+  
+  // Stark, flat background
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-medium);
+  border-left: 3px solid var(--item-color); // sharp neon accent
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.1); // subtle brutalist shadow
+  
+  overflow: hidden;
 
   &:hover {
-    border-color: var(--border-medium);
-    box-shadow: var(--shadow-md);
+    transform: translate(-2px, -2px); // stark brutalist lift
+    border-color: var(--item-color);
+    box-shadow: 4px 4px 0px var(--item-color); // neon solid shadow
   }
 }
 
 .completed {
-  opacity: 0.6;
-  background: var(--bg-primary);
-
+  opacity: 0.5;
+  filter: grayscale(100%); // Complete desaturation
+  
   .title {
     text-decoration: line-through;
     color: var(--text-tertiary);
@@ -30,23 +37,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  color: var(--text-tertiary);
-  transition: all var(--transition-fast);
-
-  &:hover {
-    color: var(--accent-primary);
-  }
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  color: var(--item-color);
+  transition: none; // snappy
 }
 
 .checkIcon {
-  color: var(--success);
+  color: var(--text-tertiary);
 }
 
-.circleIcon {
-  color: var(--text-tertiary);
+.squareIcon {
+  color: var(--item-color);
+  opacity: 1;
 }
 
 .content {
@@ -69,54 +73,54 @@
 }
 
 .badge {
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   font-weight: 600;
   padding: 2px 6px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-primary);
+  border-radius: var(--radius-sm); // sharp
+  background: transparent;
   display: flex;
   align-items: center;
   gap: 4px;
 
   &.must-do {
-    color: var(--danger);
-    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-importance-must);
+    border: 1px solid var(--color-importance-must);
   }
   &.should-do {
-    color: var(--warning);
-    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-importance-should);
+    border: 1px solid var(--color-importance-should);
   }
   &.can-do {
-    color: var(--text-secondary);
-    background: var(--bg-secondary);
+    color: var(--color-importance-can);
+    border: 1px dashed var(--color-importance-can);
   }
 
   &.urgency {
     color: var(--text-secondary);
-    background: var(--bg-secondary);
+    border: 1px solid var(--border-medium);
     
     &.immediate {
-      color: var(--danger);
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--color-importance-must);
+      border: 1px solid var(--color-importance-must);
+      background: color-mix(in srgb, var(--color-importance-must) 10%, transparent);
     }
   }
 
   &.effort {
     color: var(--text-tertiary);
-    background: transparent;
-    border: 1px solid var(--border-light);
-    font-weight: 500;
+    border: 1px solid var(--border-medium);
   }
 
   &.category {
-    background: rgba(120, 120, 120, 0.1);
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border-medium);
     color: var(--text-primary);
-    &.note { color: var(--text-tertiary); border-style: dashed; }
-    &.idea { color: var(--warning); }
-    &.reminder { color: var(--accent-primary); }
-    &.task { color: var(--text-primary); }
+    &.note { color: var(--color-category-note); border-color: var(--color-category-note); border-style: dotted; }
+    &.idea { color: var(--color-category-idea); border-color: var(--color-category-idea); }
+    &.reminder { color: var(--color-category-reminder); border-color: var(--color-category-reminder); }
+    &.task { color: var(--color-category-task); border-color: var(--color-category-task); }
   }
 }
 
