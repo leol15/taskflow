@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, Circle } from "lucide-react";
+import { Check, Circle, MoreHorizontal } from "lucide-react";
 import { Task } from "../../types/task";
 import { useTasks } from "../../context/TaskContext";
 import styles from "./TaskItem.module.scss";
@@ -10,9 +10,10 @@ import clsx from "clsx";
 
 interface TaskItemProps {
   task: Task;
+  onEdit?: () => void;
 }
 
-export function TaskItem({ task }: TaskItemProps) {
+export function TaskItem({ task, onEdit }: TaskItemProps) {
   const { toggleTask } = useTasks();
 
   return (
@@ -51,6 +52,18 @@ export function TaskItem({ task }: TaskItemProps) {
           )}
         </div>
       </div>
+
+      {onEdit && (
+        <button 
+          className={styles.editBtn} 
+          onClick={(e) => {
+            e.stopPropagation();
+            onEdit();
+          }}
+        >
+          <MoreHorizontal size={18} />
+        </button>
+      )}
     </motion.div>
   );
 }

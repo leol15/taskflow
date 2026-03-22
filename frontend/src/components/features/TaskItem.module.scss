@@ -113,3 +113,22 @@
     font-weight: 500;
   }
 }
+
+.editBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  margin-left: auto;
+
+  &:hover {
+    color: var(--text-primary);
+    background: var(--bg-primary);
+  }
+}

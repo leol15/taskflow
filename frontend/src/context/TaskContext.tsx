@@ -6,6 +6,7 @@ import { Effort, Priority, Task, Urgency } from "../types/task";
 interface TaskContextType {
   tasks: Task[];
   addTask: (title: string, priority: Priority, effort?: Effort, urgency?: Urgency) => void;
+  updateTask: (id: string, updates: Partial<Omit<Task, 'id' | 'createdAt'>>) => void;
   toggleTask: (id: string) => void;
   deleteTask: (id: string) => void;
 }
@@ -51,9 +52,29 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     setTasks((prev) => [newTask, ...prev]);
   };
 
+  const updateTask = (id: string, updates: Partial<Omit<Task, 'id' | 'createdAt'>>) => {
+    setTasks((prev) => 
+      prev.map((t) => 
+        t.id === id 
+          ? { ...t, ...updates, updatedAt: new Date().toISOString() } 
+          : t
+      )
+    );
+  };
+
   const toggleTask = (id: string) => {
     setTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+      prev.map((t) => {
+        if (t.id === id) {
+          const isCompleting = !t.completed;
+          return {
+            ...t,
+            completed: isCompleting,
+            completedAt: isCompleting ? new Date().toISOString() : undefined,
+          };
+        }
+        return t;
+      })
     );
   };
 
@@ -62,7 +83,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, addTask, toggleTask, deleteTask }}>
+    <TaskContext.Provider value={{ tasks, addTask, updateTask, toggleTask, deleteTask }}>
       {children}
     </TaskContext.Provider>
   );

@@ -10,5 +10,7 @@ export interface Task {
   effort?: Effort;
   urgency?: Urgency;
   createdAt: string; // ISO string
+  updatedAt?: string; // ISO string
+  completedAt?: string; // ISO string
   dueDate?: string; // ISO string, optional for v1
 }

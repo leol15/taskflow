@@ -4,13 +4,22 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import { useTasks } from "../../context/TaskContext";
 import { TaskItem } from "./TaskItem";
+import { TaskEditModal } from "./TaskEditModal";
 import styles from "./TaskList.module.scss";
 
 export function TaskList() {
   const { tasks } = useTasks();
+  const [editingTaskId, setEditingTaskId] = React.useState<string | null>(null);
 
   const activeTasks = tasks.filter((t) => !t.completed);
-  const completedTasks = tasks.filter((t) => t.completed);
+  const completedTasks = tasks
+    .filter((t) => t.completed)
+    .sort((a, b) => {
+      const dateA = a.completedAt ? new Date(a.completedAt).getTime() : 0;
+      const dateB = b.completedAt ? new Date(b.completedAt).getTime() : 0;
+      return dateB - dateA; // Newest completed first
+    });
+  const editingTask = tasks.find((t) => t.id === editingTaskId) || null;
 
   return (
     <div className={styles.container}>
@@ -23,7 +32,7 @@ export function TaskList() {
           <div className={styles.list}>
             <AnimatePresence>
               {activeTasks.map((task) => (
-                <TaskItem key={task.id} task={task} />
+                <TaskItem key={task.id} task={task} onEdit={() => setEditingTaskId(task.id)} />
               ))}
             </AnimatePresence>
           </div>
@@ -34,7 +43,7 @@ export function TaskList() {
               <div className={styles.list}>
                 <AnimatePresence>
                   {completedTasks.map((task) => (
-                    <TaskItem key={task.id} task={task} />
+                    <TaskItem key={task.id} task={task} onEdit={() => setEditingTaskId(task.id)} />
                   ))}
                 </AnimatePresence>
               </div>
@@ -42,6 +51,12 @@ export function TaskList() {
           )}
         </>
       )}
+
+      <TaskEditModal
+        task={editingTask}
+        isOpen={!!editingTask}
+        onClose={() => setEditingTaskId(null)}
+      />
     </div>
   );
 }
