@@ -1,12 +1,14 @@
-export type Priority = "P1" | "P2" | "P3" | "P4";
+export type Category = "task" | "idea" | "reminder" | "note";
+export type Importance = "must do" | "should do" | "can do";
 export type Effort = "<10 min" | "30 min" | "2 hours" | "unknown";
 export type Urgency = "Immediate" | "Today" | "This Week" | "Eventually";
 
 export interface Task {
   id: string;
   title: string;
+  category: Category;
   completed: boolean;
-  priority: Priority;
+  importance: Importance;
   effort?: Effort;
   urgency?: Urgency;
   createdAt: string; // ISO string

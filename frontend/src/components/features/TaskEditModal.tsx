@@ -3,13 +3,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTasks } from "../../context/TaskContext";
-import { Task, Priority, Effort, Urgency } from "../../types/task";
+import { Task, Category, Importance, Effort, Urgency } from "../../types/task";
 import { ButtonGroup } from "../ui/ButtonGroup";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import styles from "./TaskEditModal.module.scss";
 
-const PRIORITIES: readonly Priority[] = ["P1", "P2", "P3", "P4"];
+const CATEGORIES: readonly Category[] = ["task", "idea", "reminder", "note"];
+const IMPORTANCES: readonly Importance[] = ["must do", "should do", "can do"];
 const EFFORTS: readonly Effort[] = ["<10 min", "30 min", "2 hours", "unknown"];
 const URGENCIES: readonly Urgency[] = ["Immediate", "Today", "This Week", "Eventually"];
 
@@ -24,14 +25,16 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
-  const [priority, setPriority] = useState<Priority>("P4");
+  const [category, setCategory] = useState<Category>("task");
+  const [importance, setImportance] = useState<Importance>("can do");
   const [effort, setEffort] = useState<Effort>("unknown");
   const [urgency, setUrgency] = useState<Urgency>("Eventually");
 
   useEffect(() => {
     if (isOpen && task) {
       setTitle(task.title);
-      setPriority(task.priority);
+      setCategory(task.category || "task");
+      setImportance(task.importance);
       setEffort(task.effort || "unknown");
       setUrgency(task.urgency || "Eventually");
       setTimeout(() => {
@@ -48,7 +51,8 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
     
     updateTask(task.id, {
       title: title.trim(),
-      priority,
+      category,
+      importance,
       effort,
       urgency
     });
@@ -91,8 +95,12 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
                 
                 <div className={styles.attributes}>
                   <div className={styles.attributeGroup}>
-                    <label>Priority</label>
-                    <ButtonGroup options={PRIORITIES} value={priority} onChange={setPriority} />
+                    <label>Category</label>
+                    <ButtonGroup options={CATEGORIES} value={category} onChange={setCategory} />
+                  </div>
+                  <div className={styles.attributeGroup}>
+                    <label>Importance</label>
+                    <ButtonGroup options={IMPORTANCES} value={importance} onChange={setImportance} />
                   </div>
                   <div className={styles.attributeGroup}>
                     <label>Effort</label>

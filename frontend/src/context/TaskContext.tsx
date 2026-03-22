@@ -1,14 +1,15 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Effort, Priority, Task, Urgency } from "../types/task";
+import { Category, Effort, Importance, Task, Urgency } from "../types/task";
 
 interface TaskContextType {
   tasks: Task[];
-  addTask: (title: string, priority: Priority, effort?: Effort, urgency?: Urgency) => void;
+  addTask: (title: string, category: Category, importance: Importance, effort?: Effort, urgency?: Urgency) => void;
   updateTask: (id: string, updates: Partial<Omit<Task, 'id' | 'createdAt'>>) => void;
   toggleTask: (id: string) => void;
   deleteTask: (id: string) => void;
+  clearAllTasks: () => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -38,11 +39,12 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     }
   }, [tasks, isLoaded]);
 
-  const addTask = (title: string, priority: Priority, effort?: Effort, urgency?: Urgency) => {
+  const addTask = (title: string, category: Category, importance: Importance, effort?: Effort, urgency?: Urgency) => {
     const newTask: Task = {
       id: crypto.randomUUID(),
       title,
-      priority,
+      category,
+      importance,
       effort,
       urgency,
       completed: false,
@@ -82,8 +84,12 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     setTasks((prev) => prev.filter((t) => t.id !== id));
   };
 
+  const clearAllTasks = () => {
+    setTasks([]);
+  };
+
   return (
-    <TaskContext.Provider value={{ tasks, addTask, updateTask, toggleTask, deleteTask }}>
+    <TaskContext.Provider value={{ tasks, addTask, updateTask, toggleTask, deleteTask, clearAllTasks }}>
       {children}
     </TaskContext.Provider>
   );

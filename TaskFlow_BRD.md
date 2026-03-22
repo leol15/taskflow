@@ -19,8 +19,9 @@ Most todo apps fail not because users forget their tasks, but because the tools 
 - Global keyboard shortcut (Cmd/Ctrl+K) opens a task field instantly from anywhere in the app
 - **Task Detail Capture Workflow:** A fast, low-friction inline expansion or modal specifically for assigning optional attributes once the task title is recorded.
 - **Attribute Constraints:**
+  - **Category:** Core classification types to distinguish actionable items from reference material (`task`, `idea`, `reminder`, `note`).
   - **Effort:** Limited predefined categories to reduce mental effort (`<10 min`, `30 min`, `2 hours`, `unknown`).
-  - **Priority:** Predefined categories logically constrained (e.g., `P1 - Critical`, `P2 - High`, `P3 - Normal`, `P4 - Low`).
+  - **Importance:** Predefined categories logically constrained (`must do`, `should do`, `can do`).
   - **Urgency:** Time-sensitivity categories (e.g., `Immediate`, `Today`, `This Week`, `Eventually`).
 
 ---
@@ -32,28 +33,29 @@ Most todo apps fail not because users forget their tasks, but because the tools 
 **Solutions:**
 - **Projects** to group related tasks under a goal — one project per task, simple and strict
 - **Tags** as a cross-cutting layer — apply multiple tags to any task, filter across all projects by tag
+- **Attribute filtering** — instantly filter the main view by any task attribute (category, effort, importance, urgency) to narrow down the list
 - **Subtasks** — a checklist inside a task for breaking down complex work, up to 2 levels deep
 - **Global search** — fuzzy full-text search across titles, notes, and tags so users never need to remember where something lives
-- **Saved filters** — save any combination of project + tag + status as a named view for one-click access
+- **Saved filters** — save any combination of project + tag + attribute + status as a named view for one-click access
 
 ---
 
-## 3. Prioritization & Rendering
+## 3. Importance & Rendering
 
-**Problem:** When everything looks equal, nothing gets done. Users either default to easy tasks (not important ones) or feel paralyzed. Existing tools either offer no priority support, or offer so many signals (flags, scores, tags, effort levels) that maintaining the system becomes a second job.
+**Problem:** When everything looks equal, nothing gets done. Users either default to easy tasks (not important ones) or feel paralyzed. Existing tools either offer no importance support, or offer so many signals (flags, scores, tags, effort levels) that maintaining the system becomes a second job.
 
 **Solutions:**
-- **4 priority levels** (P1–P4) with clear visual indicators — simple enough to maintain, enough signal to differentiate
-- **Urgency & Actionability:** Combine priority and urgency to immediately surface "Critical + Immediate" work to the top.
+- **3 importance levels** (must do, should do, can do) with clear visual indicators — simple enough to maintain, enough signal to differentiate
+- **Urgency & Actionability:** Combine importance and urgency to immediately surface "must do + Immediate" work to the top.
 - **Effort-Based Chunking:** Allow users to filter tasks by effort categories (e.g., `<10 min`) to quickly accomplish micro-tasks when time permits.
-- **Today view** — a single daily view showing only overdue tasks, tasks due today, and P1s. Max 20 items, nothing else
+- **Today view** — a single daily view showing only overdue tasks, tasks due today, and 'must do's. Max 20 items, nothing else
 - **Overdue escalation** — tasks past their due date automatically surface to the top of any view
 - **Daily task cap** — users set a personal daily limit (default 5); tasks beyond it are visually de-emphasized so they stop overcommitting
 - **Snooze** — defer a task to a future date so it disappears from view until it's actually actionable
 
 **Rendering Requirements:**
-- **Intuitive Display:** Effort, urgency, and priority should use a minimal UI footprint (e.g., short color-coded text pills or compact icons) to prevent overwhelming list clutter.
-- **Glanceability & Visual Weight:** `P1` and `Immediate` tasks should instantly stand out through distinct typography or vibrant accents, while lower priority, non-urgent, or `unknown` effort tasks recede visually.
+- **Intuitive Display:** Effort, urgency, and importance should use a minimal UI footprint (e.g., short color-coded text pills or compact icons) to prevent overwhelming list clutter.
+- **Glanceability & Visual Weight:** `must do` and `Immediate` tasks should instantly stand out through distinct typography or vibrant accents, while lower importance, non-urgent, or `unknown` effort tasks recede visually.
 
 ---
 
@@ -77,6 +79,6 @@ Recurring tasks, reminders, calendar sync, team collaboration, analytics, integr
 These were removed from the main requirements for now but are worth revisiting in a later sprint.
 
 - **Natural language parsing** — typing "dentist Friday 3pm" sets the title and due date automatically. High value but adds NLP complexity and edge cases to v1.
-- **Inbox zone** — tasks saved with zero metadata land in a dedicated inbox with no project, date, or priority required. Deferred pending a decision on whether zero-metadata tasks create more clutter than they solve.
+- **Inbox zone** — tasks saved with zero metadata land in a dedicated inbox with no project, date, or importance required. Deferred pending a decision on whether zero-metadata tasks create more clutter than they solve.
 - **Browser extension** — capture tasks from any webpage with the URL auto-attached. Useful but out of scope until the core app is stable.
 - **Email forwarding** — forward an email to a personal capture address and it becomes a task. Depends on email infrastructure not planned for v1.

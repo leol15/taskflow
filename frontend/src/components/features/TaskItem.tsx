@@ -33,9 +33,15 @@ export function TaskItem({ task, onEdit }: TaskItemProps) {
       <div className={styles.content}>
         <span className={styles.title}>{task.title}</span>
         <div className={styles.metadata}>
-          <span className={clsx(styles.badge, styles[task.priority.toLowerCase()])}>
-            {task.priority}
+          <span className={clsx(styles.badge, styles[task.importance.replace(' ', '-')])}>
+            {task.importance}
           </span>
+
+          {task.category && (
+            <span className={clsx(styles.badge, styles.category, styles[task.category])}>
+              {task.category}
+            </span>
+          )}
 
           {task.urgency && task.urgency !== "Eventually" && (
             <span className={clsx(styles.badge, styles.urgency, {

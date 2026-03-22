@@ -5,7 +5,7 @@ A minimalist, high-speed task management application designed to reduce friction
 ## Features (Planned)
 - **Frictionless Capture:** Instantly add tasks without breaking your flow.
 - **Flexible Organization:** Structure work using Projects, Tags, and nested Subtasks.
-- **Actionable Prioritization:** Maintain focus with a capped "Today" view, automatic overdue escalation, and 4 distinct priority levels.
+- **Actionable Prioritization:** Maintain focus with a capped "Today" view, automatic overdue escalation, and 3 distinct importance levels.
 
 ## Tech Stack
 - **Frontend Framework:** Next.js (App Router, Static Export)

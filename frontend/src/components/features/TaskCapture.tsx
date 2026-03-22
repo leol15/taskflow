@@ -5,20 +5,22 @@ import { Plus } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useTasks } from "../../context/TaskContext";
 import { useGlobalShortcut } from "../../hooks/useGlobalShortcut";
-import { Effort, Priority, Urgency } from "../../types/task";
+import { Category, Effort, Importance, Urgency } from "../../types/task";
 import { Button } from "../ui/Button";
 import { ButtonGroup } from "../ui/ButtonGroup";
 import { Input } from "../ui/Input";
 import styles from "./TaskCapture.module.scss";
 
-const PRIORITIES: readonly Priority[] = ["P1", "P2", "P3", "P4"];
+const CATEGORIES: readonly Category[] = ["task", "idea", "reminder", "note"];
+const IMPORTANCES: readonly Importance[] = ["must do", "should do", "can do"];
 const EFFORTS: readonly Effort[] = ["<10 min", "30 min", "2 hours", "unknown"];
 const URGENCIES: readonly Urgency[] = ["Immediate", "Today", "This Week", "Eventually"];
 
 export function TaskCapture() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
-  const [priority, setPriority] = useState<Priority>("P4");
+  const [category, setCategory] = useState<Category>("task");
+  const [importance, setImportance] = useState<Importance>("can do");
   const [effort, setEffort] = useState<Effort>("unknown");
   const [urgency, setUrgency] = useState<Urgency>("Eventually");
   const { addTask } = useTasks();
@@ -33,7 +35,8 @@ export function TaskCapture() {
     } else {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setTitle("");
-      setPriority("P4");
+      setCategory("task");
+      setImportance("can do");
       setEffort("unknown");
       setUrgency("Eventually");
     }
@@ -42,7 +45,7 @@ export function TaskCapture() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
-    addTask(title.trim(), priority, effort, urgency);
+    addTask(title.trim(), category, importance, effort, urgency);
     setIsOpen(false);
   };
 
@@ -78,8 +81,12 @@ export function TaskCapture() {
                 />
                 <div className={styles.attributes}>
                   <div className={styles.attributeGroup}>
-                    <label>Priority</label>
-                    <ButtonGroup options={PRIORITIES} value={priority} onChange={setPriority} />
+                    <label>Category</label>
+                    <ButtonGroup options={CATEGORIES} value={category} onChange={setCategory} />
+                  </div>
+                  <div className={styles.attributeGroup}>
+                    <label>Importance</label>
+                    <ButtonGroup options={IMPORTANCES} value={importance} onChange={setImportance} />
                   </div>
                   <div className={styles.attributeGroup}>
                     <label>Effort</label>

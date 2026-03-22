@@ -78,19 +78,15 @@
   align-items: center;
   gap: 4px;
 
-  &.p1 {
+  &.must-do {
     color: var(--danger);
     background: rgba(239, 68, 68, 0.1);
   }
-  &.p2 {
+  &.should-do {
     color: var(--warning);
     background: rgba(245, 158, 11, 0.1);
   }
-  &.p3 {
-    color: var(--accent-primary);
-    background: rgba(59, 130, 246, 0.1);
-  }
-  &.p4 {
+  &.can-do {
     color: var(--text-secondary);
     background: var(--bg-secondary);
   }
@@ -111,6 +107,16 @@
     background: transparent;
     border: 1px solid var(--border-light);
     font-weight: 500;
+  }
+
+  &.category {
+    background: rgba(120, 120, 120, 0.1);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+    &.note { color: var(--text-tertiary); border-style: dashed; }
+    &.idea { color: var(--warning); }
+    &.reminder { color: var(--accent-primary); }
+    &.task { color: var(--text-primary); }
   }
 }
 
