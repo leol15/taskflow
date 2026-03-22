@@ -15,6 +15,69 @@
   padding: 12px 16px;
 }
 
+.categoryFilters {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.categoryBtn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  &:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 2px 2px 0px var(--border-medium);
+  }
+
+  &.active {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+    box-shadow: 2px 2px 0px var(--border-medium);
+  }
+
+  &.todo { --btn-color: var(--color-category-todo); }
+  &.idea { --btn-color: var(--color-category-idea); }
+  &.reminder { --btn-color: var(--color-category-reminder); }
+  &.note { --btn-color: var(--color-category-note); }
+  &.reflection { --btn-color: var(--color-category-reflection); }
+
+  &.todo, &.idea, &.reminder, &.note, &.reflection {
+    color: var(--btn-color);
+    border-color: color-mix(in srgb, var(--btn-color) 30%, var(--border-medium));
+    background: color-mix(in srgb, var(--btn-color) 5%, transparent);
+
+    &:hover {
+      background: color-mix(in srgb, var(--btn-color) 15%, transparent);
+      border-color: var(--btn-color);
+      color: var(--btn-color);
+      box-shadow: 2px 2px 0px color-mix(in srgb, var(--btn-color) 40%, transparent);
+    }
+
+    &.active {
+      background: var(--btn-color);
+      color: #000;
+      border-color: var(--btn-color);
+      box-shadow: 2px 2px 0px color-mix(in srgb, var(--text-primary) 50%, transparent);
+    }
+  }
+}
+
 .filtersPrimary {
   display: flex;
   gap: 16px;

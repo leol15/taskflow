@@ -43,13 +43,16 @@ export function TaskList() {
       {tasks.length > 0 && (
         <div className={styles.filtersContainer}>
           <div className={styles.filtersPrimary}>
-            <div className={styles.filterGroup}>
-              <span className={styles.filterLabel}>Category:</span>
-              <div className={styles.buttonGroup}>
-                {["All", "todo", "idea", "reminder", "note", "reflection"].map(c => (
-                  <button key={c} className={`${styles.filterBtn} ${filterCategory === c ? styles.active : ''}`} onClick={() => setFilterCategory(c)}>{c}</button>
-                ))}
-              </div>
+            <div className={styles.categoryFilters}>
+              {["All", "todo", "idea", "reminder", "note", "reflection"].map(c => (
+                <button 
+                  key={c} 
+                  className={`${styles.categoryBtn} ${c !== "All" ? styles[c] : ''} ${filterCategory === c ? styles.active : ''}`} 
+                  onClick={() => setFilterCategory(c)}
+                >
+                  {c}
+                </button>
+              ))}
             </div>
 
             <div className={styles.filterGroup}>
