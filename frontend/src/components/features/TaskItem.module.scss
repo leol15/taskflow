@@ -29,7 +29,30 @@
   
   .title {
     text-decoration: line-through;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
+  }
+}
+
+.checkboxArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px; // Make area larger than checkbox
+  margin: -24px -8px -24px -16px; // Offset padding
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: color-mix(in srgb, var(--item-color) 15%, transparent);
+    
+    .checkbox {
+      transform: scale(1.1);
+      border-radius: 4px;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--item-color) 20%, transparent);
+    }
   }
 }
 
@@ -45,7 +68,7 @@
 }
 
 .checkIcon {
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
 }
 
 .squareIcon {
@@ -110,7 +133,7 @@
   }
 
   &.effort {
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     border: 1px solid var(--border-medium);
   }
 
@@ -124,21 +147,10 @@
   }
 }
 
-.editBtn {
-  background: transparent;
-  border: none;
-  color: var(--text-tertiary);
-  cursor: pointer;
-  padding: 6px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-fast);
+.datePeriod {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
   margin-left: auto;
-
-  &:hover {
-    color: var(--text-primary);
-    background: var(--bg-primary);
-  }
 }

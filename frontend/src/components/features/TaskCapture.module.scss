@@ -106,26 +106,7 @@
   }
 }
 
-.attributes {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.attributesLayout {
   padding: 0 16px 16px;
   background: transparent;
-}
-
-.attributeGroup {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-
-  label {
-    font-size: 11px;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-  }
 }

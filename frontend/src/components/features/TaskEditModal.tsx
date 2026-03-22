@@ -4,42 +4,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTasks } from "../../context/TaskContext";
 import { Task, Category, Importance, Effort, Urgency } from "../../types/task";
-import { ButtonGroup } from "../ui/ButtonGroup";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
+import { TaskAttributesForm } from "./TaskAttributesForm";
 import styles from "./TaskEditModal.module.scss";
-
-const CATEGORIES: readonly Category[] = ["task", "idea", "reminder", "note"];
-const IMPORTANCES: readonly Importance[] = ["must do", "should do", "can do"];
-const EFFORTS: readonly Effort[] = ["<10 min", "30 min", "2 hours", "unknown"];
-const URGENCIES: readonly Urgency[] = ["Immediate", "Today", "This Week", "Eventually"];
-
-const CATEGORY_COLORS = {
-  "task": "--color-category-task",
-  "idea": "--color-category-idea",
-  "reminder": "--color-category-reminder",
-  "note": "--color-category-note",
-};
-
-const IMPORTANCE_COLORS = {
-  "must do": "--color-importance-must",
-  "should do": "--color-importance-should",
-  "can do": "--color-importance-can",
-};
-
-const EFFORT_COLORS = {
-  "<10 min": "--color-effort-quick",
-  "30 min": "--color-effort-medium",
-  "2 hours": "--color-effort-long",
-  "unknown": "--color-effort-unknown",
-};
-
-const URGENCY_COLORS = {
-  "Immediate": "--color-importance-must",
-  "Today": "--color-importance-should",
-  "This Week": "--color-category-task",
-  "Eventually": "--color-effort-unknown",
-};
 
 interface TaskEditModalProps {
   task: Task | null;
@@ -48,7 +16,7 @@ interface TaskEditModalProps {
 }
 
 export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
-  const { updateTask } = useTasks();
+  const { updateTask, deleteTask } = useTasks();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
@@ -86,6 +54,13 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
     onClose();
   };
 
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this task?")) {
+      deleteTask(task.id);
+      onClose();
+    }
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString(undefined, {
       dateStyle: "medium",
@@ -120,24 +95,12 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
                   className={styles.inputOverrides}
                 />
                 
-                <div className={styles.attributes}>
-                  <div className={styles.attributeGroup}>
-                    <label>Category</label>
-                    <ButtonGroup options={CATEGORIES} value={category} onChange={setCategory} colorMap={CATEGORY_COLORS} />
-                  </div>
-                  <div className={styles.attributeGroup}>
-                    <label>Importance</label>
-                    <ButtonGroup options={IMPORTANCES} value={importance} onChange={setImportance} colorMap={IMPORTANCE_COLORS} />
-                  </div>
-                  <div className={styles.attributeGroup}>
-                    <label>Effort</label>
-                    <ButtonGroup options={EFFORTS} value={effort} onChange={setEffort} colorMap={EFFORT_COLORS} />
-                  </div>
-                  <div className={styles.attributeGroup}>
-                    <label>Urgency</label>
-                    <ButtonGroup options={URGENCIES} value={urgency} onChange={setUrgency} colorMap={URGENCY_COLORS} />
-                  </div>
-                </div>
+                <TaskAttributesForm
+                  category={category} setCategory={setCategory}
+                  importance={importance} setImportance={setImportance}
+                  effort={effort} setEffort={setEffort}
+                  urgency={urgency} setUrgency={setUrgency}
+                />
 
                 <div className={styles.timestamps}>
                   <div className={styles.timestamp}>
@@ -154,8 +117,13 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
               </div>
 
               <div className={styles.footer}>
-                <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>
-                <Button type="submit" variant="primary">Save Changes</Button>
+                <button type="button" className={styles.deleteBtn} onClick={handleDelete}>
+                  Delete Task
+                </button>
+                <div className={styles.footerActions}>
+                  <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>
+                  <Button type="submit" variant="primary">Save Changes</Button>
+                </div>
               </div>
             </form>
           </motion.div>

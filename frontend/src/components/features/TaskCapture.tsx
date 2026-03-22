@@ -7,41 +7,9 @@ import { useTasks } from "../../context/TaskContext";
 import { useGlobalShortcut } from "../../hooks/useGlobalShortcut";
 import { Category, Effort, Importance, Urgency } from "../../types/task";
 import { Button } from "../ui/Button";
-import { ButtonGroup } from "../ui/ButtonGroup";
 import { Input } from "../ui/Input";
+import { TaskAttributesForm } from "./TaskAttributesForm";
 import styles from "./TaskCapture.module.scss";
-
-const CATEGORIES: readonly Category[] = ["task", "idea", "reminder", "note"];
-const IMPORTANCES: readonly Importance[] = ["must do", "should do", "can do"];
-const EFFORTS: readonly Effort[] = ["<10 min", "30 min", "2 hours", "unknown"];
-const URGENCIES: readonly Urgency[] = ["Immediate", "Today", "This Week", "Eventually"];
-
-const CATEGORY_COLORS = {
-  "task": "--color-category-task",
-  "idea": "--color-category-idea",
-  "reminder": "--color-category-reminder",
-  "note": "--color-category-note",
-};
-
-const IMPORTANCE_COLORS = {
-  "must do": "--color-importance-must",
-  "should do": "--color-importance-should",
-  "can do": "--color-importance-can",
-};
-
-const EFFORT_COLORS = {
-  "<10 min": "--color-effort-quick",
-  "30 min": "--color-effort-medium",
-  "2 hours": "--color-effort-long",
-  "unknown": "--color-effort-unknown",
-};
-
-const URGENCY_COLORS = {
-  "Immediate": "--color-importance-must",
-  "Today": "--color-importance-should",
-  "This Week": "--color-category-task",
-  "Eventually": "--color-effort-unknown",
-};
 
 export function TaskCapture() {
   const [isOpen, setIsOpen] = useState(false);
@@ -106,24 +74,13 @@ export function TaskCapture() {
                   icon={<Plus size={20} />}
                   className={styles.inputOverrides}
                 />
-                <div className={styles.attributes}>
-                  <div className={styles.attributeGroup}>
-                    <label>Category</label>
-                    <ButtonGroup options={CATEGORIES} value={category} onChange={setCategory} colorMap={CATEGORY_COLORS} />
-                  </div>
-                  <div className={styles.attributeGroup}>
-                    <label>Importance</label>
-                    <ButtonGroup options={IMPORTANCES} value={importance} onChange={setImportance} colorMap={IMPORTANCE_COLORS} />
-                  </div>
-                  <div className={styles.attributeGroup}>
-                    <label>Effort</label>
-                    <ButtonGroup options={EFFORTS} value={effort} onChange={setEffort} colorMap={EFFORT_COLORS} />
-                  </div>
-                  <div className={styles.attributeGroup}>
-                    <label>Urgency</label>
-                    <ButtonGroup options={URGENCIES} value={urgency} onChange={setUrgency} colorMap={URGENCY_COLORS} />
-                  </div>
-                </div>
+                <TaskAttributesForm
+                  category={category} setCategory={setCategory}
+                  importance={importance} setImportance={setImportance}
+                  effort={effort} setEffort={setEffort}
+                  urgency={urgency} setUrgency={setUrgency}
+                  className={styles.attributesLayout}
+                />
                 <div className={styles.footer}>
                   <span className={styles.footerHint}>Press <kbd>Enter</kbd> to save, <kbd>Esc</kbd> to dismiss</span>
                   <Button type="submit" size="sm" variant="primary">Save Task</Button>
