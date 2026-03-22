@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.scss";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "TaskFlow",
-  description: "TaskFlow Application",
+  title: "TaskFlow | Sleek Task Management",
+  description: "Capture, Organize, Prioritize.",
 };
+
+import { TaskProvider } from "../context/TaskContext";
 
 export default function RootLayout({
   children,
@@ -23,11 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
-    >
-      <body>{children}</body>
+    <html lang="en">
+      <body className={`${inter.variable} ${outfit.variable}`}>
+        <TaskProvider>{children}</TaskProvider>
+      </body>
     </html>
   );
 }
