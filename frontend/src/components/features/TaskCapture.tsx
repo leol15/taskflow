@@ -7,8 +7,13 @@ import { useTasks } from "../../context/TaskContext";
 import { useGlobalShortcut } from "../../hooks/useGlobalShortcut";
 import { Effort, Priority, Urgency } from "../../types/task";
 import { Button } from "../ui/Button";
+import { ButtonGroup } from "../ui/ButtonGroup";
 import { Input } from "../ui/Input";
 import styles from "./TaskCapture.module.scss";
+
+const PRIORITIES: readonly Priority[] = ["P1", "P2", "P3", "P4"];
+const EFFORTS: readonly Effort[] = ["<10 min", "30 min", "2 hours", "unknown"];
+const URGENCIES: readonly Urgency[] = ["Immediate", "Today", "This Week", "Eventually"];
 
 export function TaskCapture() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,30 +79,15 @@ export function TaskCapture() {
                 <div className={styles.attributes}>
                   <div className={styles.attributeGroup}>
                     <label>Priority</label>
-                    <select value={priority} onChange={e => setPriority(e.target.value as Priority)}>
-                      <option value="P1">P1 - Critical</option>
-                      <option value="P2">P2 - High</option>
-                      <option value="P3">P3 - Normal</option>
-                      <option value="P4">P4 - Low</option>
-                    </select>
+                    <ButtonGroup options={PRIORITIES} value={priority} onChange={setPriority} />
                   </div>
                   <div className={styles.attributeGroup}>
                     <label>Effort</label>
-                    <select value={effort} onChange={e => setEffort(e.target.value as Effort)}>
-                      <option value="<10 min">&lt;10 min</option>
-                      <option value="30 min">30 min</option>
-                      <option value="2 hours">2 hours</option>
-                      <option value="unknown">unknown</option>
-                    </select>
+                    <ButtonGroup options={EFFORTS} value={effort} onChange={setEffort} />
                   </div>
                   <div className={styles.attributeGroup}>
                     <label>Urgency</label>
-                    <select value={urgency} onChange={e => setUrgency(e.target.value as Urgency)}>
-                      <option value="Immediate">Immediate</option>
-                      <option value="Today">Today</option>
-                      <option value="This Week">This Week</option>
-                      <option value="Eventually">Eventually</option>
-                    </select>
+                    <ButtonGroup options={URGENCIES} value={urgency} onChange={setUrgency} />
                   </div>
                 </div>
                 <div className={styles.footer}>

@@ -17,6 +17,11 @@ Most todo apps fail not because users forget their tasks, but because the tools 
 
 **Solutions:**
 - Global keyboard shortcut (Cmd/Ctrl+K) opens a task field instantly from anywhere in the app
+- **Task Detail Capture Workflow:** A fast, low-friction inline expansion or modal specifically for assigning optional attributes once the task title is recorded.
+- **Attribute Constraints:**
+  - **Effort:** Limited predefined categories to reduce mental effort (`<10 min`, `30 min`, `2 hours`, `unknown`).
+  - **Priority:** Predefined categories logically constrained (e.g., `P1 - Critical`, `P2 - High`, `P3 - Normal`, `P4 - Low`).
+  - **Urgency:** Time-sensitivity categories (e.g., `Immediate`, `Today`, `This Week`, `Eventually`).
 
 ---
 
@@ -33,16 +38,22 @@ Most todo apps fail not because users forget their tasks, but because the tools 
 
 ---
 
-## 3. Prioritization
+## 3. Prioritization & Rendering
 
 **Problem:** When everything looks equal, nothing gets done. Users either default to easy tasks (not important ones) or feel paralyzed. Existing tools either offer no priority support, or offer so many signals (flags, scores, tags, effort levels) that maintaining the system becomes a second job.
 
 **Solutions:**
 - **4 priority levels** (P1–P4) with clear visual indicators — simple enough to maintain, enough signal to differentiate
+- **Urgency & Actionability:** Combine priority and urgency to immediately surface "Critical + Immediate" work to the top.
+- **Effort-Based Chunking:** Allow users to filter tasks by effort categories (e.g., `<10 min`) to quickly accomplish micro-tasks when time permits.
 - **Today view** — a single daily view showing only overdue tasks, tasks due today, and P1s. Max 20 items, nothing else
 - **Overdue escalation** — tasks past their due date automatically surface to the top of any view
 - **Daily task cap** — users set a personal daily limit (default 5); tasks beyond it are visually de-emphasized so they stop overcommitting
 - **Snooze** — defer a task to a future date so it disappears from view until it's actually actionable
+
+**Rendering Requirements:**
+- **Intuitive Display:** Effort, urgency, and priority should use a minimal UI footprint (e.g., short color-coded text pills or compact icons) to prevent overwhelming list clutter.
+- **Glanceability & Visual Weight:** `P1` and `Immediate` tasks should instantly stand out through distinct typography or vibrant accents, while lower priority, non-urgent, or `unknown` effort tasks recede visually.
 
 ---
 
