@@ -19,7 +19,7 @@ Most todo apps fail not because users forget their tasks, but because the tools 
 - Global keyboard shortcut (Cmd/Ctrl+K) opens a task field instantly from anywhere in the app
 - **Task Detail Capture Workflow:** A fast, low-friction inline expansion or modal specifically for assigning optional attributes once the task title is recorded.
 - **Attribute Constraints:**
-  - **Category:** Core classification types to distinguish actionable items from reference material (`task`, `idea`, `reminder`, `note`).
+  - **Category:** Core classification types to distinguish actionable items from reference material (`todo`, `idea`, `reminder`, `note`, `reflection`).
   - **Effort:** Limited predefined categories to reduce mental effort (`<10 min`, `30 min`, `2 hours`, `unknown`).
   - **Importance:** Predefined categories logically constrained (`must do`, `should do`, `can do`).
   - **Urgency:** Time-sensitivity categories (e.g., `Immediate`, `Today`, `This Week`, `Eventually`).

@@ -1,4 +1,4 @@
-export type Category = "task" | "idea" | "reminder" | "note";
+export type Category = "todo" | "idea" | "reminder" | "note" | "reflection";
 export type Importance = "must do" | "should do" | "can do";
 export type Effort = "<10 min" | "30 min" | "2 hours" | "unknown";
 export type Urgency = "Immediate" | "Today" | "This Week" | "Eventually";

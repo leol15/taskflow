@@ -8,18 +8,27 @@
   border-radius: var(--radius-sm); // sharp corners
   transition: all var(--transition-fast);
   
-  // Stark, flat background
-  background: var(--bg-elevated);
+  // Stark, flat background with a super subtle dual gradient
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--category-color) 4%, var(--bg-elevated)) 0%,
+    color-mix(in srgb, var(--importance-color) 4%, var(--bg-elevated)) 100%
+  );
   border: 1px solid var(--border-medium);
-  border-left: 3px solid var(--item-color); // sharp neon accent
-  box-shadow: 2px 2px 0px rgba(0,0,0,0.1); // subtle brutalist shadow
+  border-left: 3px solid var(--category-color); // sharp neon accent for category
+  box-shadow: 2px 2px 0px var(--importance-color); // subtle brutalist shadow for importance
   
   overflow: hidden;
 
   &:hover {
-    transform: translate(-2px, -2px); // stark brutalist lift
-    border-color: var(--item-color);
-    box-shadow: 4px 4px 0px var(--item-color); // neon solid shadow
+    transform: translate(-3px, -3px); // stark brutalist lift
+    border-color: var(--category-color);
+    box-shadow: 5px 5px 0px var(--importance-color); // neon solid shadow based on importance
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--category-color) 8%, var(--bg-elevated)) 0%,
+      color-mix(in srgb, var(--importance-color) 8%, var(--bg-elevated)) 100%
+    );
   }
 }
 
@@ -40,18 +49,19 @@
   padding: 24px 16px; // Make area larger than checkbox
   margin: -24px -8px -24px -16px; // Offset padding
   cursor: pointer;
-  background: transparent;
+  background: color-mix(in srgb, var(--category-color) 5%, transparent); // Always slightly tinted
   border: none;
+  border-right: 1px solid color-mix(in srgb, var(--category-color) 15%, transparent);
   outline: none;
   transition: all var(--transition-fast);
 
   &:hover {
-    background: color-mix(in srgb, var(--item-color) 15%, transparent);
+    background: color-mix(in srgb, var(--category-color) 15%, transparent);
     
     .checkbox {
       transform: scale(1.1);
       border-radius: 4px;
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--item-color) 20%, transparent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--category-color) 20%, transparent);
     }
   }
 }
@@ -63,7 +73,7 @@
   width: 20px;
   height: 20px;
   border-radius: 2px;
-  color: var(--item-color);
+  color: var(--category-color);
   transition: none; // snappy
 }
 
@@ -72,7 +82,7 @@
 }
 
 .squareIcon {
-  color: var(--item-color);
+  color: var(--category-color);
   opacity: 1;
 }
 
@@ -143,7 +153,8 @@
     &.note { color: var(--color-category-note); border-color: var(--color-category-note); border-style: dotted; }
     &.idea { color: var(--color-category-idea); border-color: var(--color-category-idea); }
     &.reminder { color: var(--color-category-reminder); border-color: var(--color-category-reminder); }
-    &.task { color: var(--color-category-task); border-color: var(--color-category-task); }
+    &.todo { color: var(--color-category-todo); border-color: var(--color-category-todo); }
+    &.reflection { color: var(--color-category-reflection); border-color: var(--color-category-reflection); }
   }
 }
 

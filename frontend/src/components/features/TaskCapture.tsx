@@ -14,7 +14,7 @@ import styles from "./TaskCapture.module.scss";
 export function TaskCapture() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState<Category>("task");
+  const [category, setCategory] = useState<Category>("todo");
   const [importance, setImportance] = useState<Importance>("can do");
   const [effort, setEffort] = useState<Effort>("unknown");
   const [urgency, setUrgency] = useState<Urgency>("Eventually");
@@ -30,7 +30,7 @@ export function TaskCapture() {
     } else {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setTitle("");
-      setCategory("task");
+      setCategory("todo");
       setImportance("can do");
       setEffort("unknown");
       setUrgency("Eventually");

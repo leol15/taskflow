@@ -25,7 +25,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
       try {
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setTasks(JSON.parse(saved));
-      } catch (e) {
+      } catch {
         console.error("Failed to parse tasks");
       }
     }

@@ -1,15 +1,16 @@
 import { Category, Importance, Effort, Urgency } from "../types/task";
 
-export const CATEGORIES: readonly Category[] = ["task", "idea", "reminder", "note"];
+export const CATEGORIES: readonly Category[] = ["todo", "idea", "reminder", "note", "reflection"];
 export const IMPORTANCES: readonly Importance[] = ["must do", "should do", "can do"];
 export const EFFORTS: readonly Effort[] = ["<10 min", "30 min", "2 hours", "unknown"];
 export const URGENCIES: readonly Urgency[] = ["Immediate", "Today", "This Week", "Eventually"];
 
 export const CATEGORY_COLORS: Record<string, string> = {
-  task: "--color-category-task",
+  todo: "--color-category-todo",
   idea: "--color-category-idea",
   reminder: "--color-category-reminder",
   note: "--color-category-note",
+  reflection: "--color-category-reflection",
 };
 
 export const IMPORTANCE_COLORS: Record<string, string> = {
@@ -28,6 +29,6 @@ export const EFFORT_COLORS: Record<string, string> = {
 export const URGENCY_COLORS: Record<string, string> = {
   Immediate: "--color-importance-must",
   Today: "--color-importance-should",
-  "This Week": "--color-category-task",
+  "This Week": "--color-category-todo",
   Eventually: "--color-effort-unknown",
 };

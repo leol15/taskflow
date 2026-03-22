@@ -20,15 +20,16 @@ export function TaskEditModal({ task, isOpen, onClose }: TaskEditModalProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState<Category>("task");
+  const [category, setCategory] = useState<Category>("todo");
   const [importance, setImportance] = useState<Importance>("can do");
   const [effort, setEffort] = useState<Effort>("unknown");
   const [urgency, setUrgency] = useState<Urgency>("Eventually");
 
   useEffect(() => {
     if (isOpen && task) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTitle(task.title);
-      setCategory(task.category || "task");
+      setCategory(task.category || "todo");
       setImportance(task.importance);
       setEffort(task.effort || "unknown");
       setUrgency(task.urgency || "Eventually");

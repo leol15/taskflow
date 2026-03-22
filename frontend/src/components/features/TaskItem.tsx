@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Check, Square } from "lucide-react";
 import { Task } from "../../types/task";
 import { useTasks } from "../../context/TaskContext";
+import { CATEGORY_COLORS, IMPORTANCE_COLORS } from "../../utils/constants";
 import styles from "./TaskItem.module.scss";
 import clsx from "clsx";
 
@@ -23,11 +24,16 @@ const formatDate = (dateString: string) => {
 export function TaskItem({ task, onEdit }: TaskItemProps) {
   const { toggleTask } = useTasks();
 
-  const importanceKey = task.importance.replace(' do', '');
+  const categoryColorVar = task.category ? CATEGORY_COLORS[task.category] : CATEGORY_COLORS['todo'];
+  const importanceColorVar = IMPORTANCE_COLORS[task.importance] || IMPORTANCE_COLORS['should do'];
+
   const itemStyle = {
-    '--item-color': task.completed 
+    '--category-color': task.completed 
       ? 'var(--text-tertiary)' 
-      : `var(--color-importance-${importanceKey})`
+      : `var(${categoryColorVar})`,
+    '--importance-color': task.completed
+      ? 'var(--text-tertiary)'
+      : `var(${importanceColorVar})`
   } as React.CSSProperties;
 
   return (

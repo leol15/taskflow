@@ -4,6 +4,7 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import { useTasks } from "../../context/TaskContext";
 import { TaskItem } from "./TaskItem";
+import { Task } from "../../types/task";
 import { TaskEditModal } from "./TaskEditModal";
 import { sortTasks, SortOption } from "../../utils/sort";
 import styles from "./TaskList.module.scss";
@@ -19,7 +20,7 @@ export function TaskList() {
   const [sortOption, setSortOption] = React.useState<SortOption>("createdAt");
   const [showAdvancedFilters, setShowAdvancedFilters] = React.useState<boolean>(false);
 
-  const applyFilters = (t: any) => {
+  const applyFilters = (t: Task) => {
     if (filterCategory !== "All" && t.category !== filterCategory) return false;
     if (filterImportance !== "All" && t.importance !== filterImportance) return false;
     if (filterEffort !== "All" && t.effort !== filterEffort) return false;
@@ -45,7 +46,7 @@ export function TaskList() {
             <div className={styles.filterGroup}>
               <span className={styles.filterLabel}>Category:</span>
               <div className={styles.buttonGroup}>
-                {["All", "task", "idea", "reminder", "note"].map(c => (
+                {["All", "todo", "idea", "reminder", "note", "reflection"].map(c => (
                   <button key={c} className={`${styles.filterBtn} ${filterCategory === c ? styles.active : ''}`} onClick={() => setFilterCategory(c)}>{c}</button>
                 ))}
               </div>
