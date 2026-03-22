@@ -37,6 +37,7 @@ Most todo apps fail not because users forget their tasks, but because the tools 
 - **Subtasks** — a checklist inside a task for breaking down complex work, up to 2 levels deep
 - **Global search** — fuzzy full-text search across titles, notes, and tags so users never need to remember where something lives
 - **Saved filters** — save any combination of project + tag + attribute + status as a named view for one-click access
+- **Sorting** — ability to sort tasks by creation time, last updated time, and prioritized sort (algorithmic sorting based on task attributes)
 
 ---
 

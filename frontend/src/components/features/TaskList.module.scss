@@ -5,31 +5,22 @@
   width: 100%;
 }
 
-.filters {
+.filtersContainer {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  align-items: center;
-  padding: 12px 16px;
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
+  padding: 12px 16px;
+}
+
+.filtersPrimary {
+  display: flex;
+  gap: 16px;
+  align-items: center;
   flex-wrap: wrap;
 
-  select {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-medium);
-    color: var(--text-secondary);
-    border-radius: var(--radius-sm);
-    padding: 6px 8px;
-    font-size: 13px;
-    outline: none;
-    cursor: pointer;
-
-    &:focus {
-      border-color: var(--accent-primary);
-    }
-  }
-  
   .clearAllBtn {
     margin-left: auto;
     background: transparent;
@@ -45,6 +36,73 @@
     &:hover {
       background: rgba(239, 68, 68, 0.1);
     }
+  }
+}
+
+.filtersAdvanced {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.buttonGroup {
+  display: flex;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.filterBtn {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  &.active {
+    background: var(--accent-primary);
+    color: white;
+    font-weight: 500;
+  }
+}
+
+.advancedToggle {
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+
+  &.active {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border-color: var(--border-medium);
   }
 }
 
