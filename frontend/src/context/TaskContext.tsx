@@ -1,11 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Task, Priority } from "../types/task";
+import { Effort, Priority, Task, Urgency } from "../types/task";
 
 interface TaskContextType {
   tasks: Task[];
-  addTask: (title: string, priority: Priority) => void;
+  addTask: (title: string, priority: Priority, effort?: Effort, urgency?: Urgency) => void;
   toggleTask: (id: string) => void;
   deleteTask: (id: string) => void;
 }
@@ -21,6 +21,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem("taskflow_tasks");
     if (saved) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setTasks(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse tasks");
@@ -36,11 +37,13 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     }
   }, [tasks, isLoaded]);
 
-  const addTask = (title: string, priority: Priority) => {
+  const addTask = (title: string, priority: Priority, effort?: Effort, urgency?: Urgency) => {
     const newTask: Task = {
       id: crypto.randomUUID(),
       title,
       priority,
+      effort,
+      urgency,
       completed: false,
       createdAt: new Date().toISOString(),
     };

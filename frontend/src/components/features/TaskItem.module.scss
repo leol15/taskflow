@@ -65,14 +65,18 @@
 .metadata {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
-.priority {
+.badge {
   font-size: 11px;
   font-weight: 600;
   padding: 2px 6px;
   border-radius: var(--radius-sm);
   background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
 
   &.p1 {
     color: var(--danger);
@@ -89,5 +93,23 @@
   &.p4 {
     color: var(--text-secondary);
     background: var(--bg-secondary);
+  }
+
+  &.urgency {
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    
+    &.immediate {
+      color: var(--danger);
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+  }
+
+  &.effort {
+    color: var(--text-tertiary);
+    background: transparent;
+    border: 1px solid var(--border-light);
+    font-weight: 500;
   }
 }

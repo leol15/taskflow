@@ -32,9 +32,23 @@ export function TaskItem({ task }: TaskItemProps) {
       <div className={styles.content}>
         <span className={styles.title}>{task.title}</span>
         <div className={styles.metadata}>
-          <span className={clsx(styles.priority, styles[task.priority.toLowerCase()])}>
+          <span className={clsx(styles.badge, styles[task.priority.toLowerCase()])}>
             {task.priority}
           </span>
+
+          {task.urgency && task.urgency !== "Eventually" && (
+            <span className={clsx(styles.badge, styles.urgency, {
+              [styles.immediate]: task.urgency === "Immediate",
+            })}>
+              {task.urgency}
+            </span>
+          )}
+
+          {task.effort && task.effort !== "unknown" && (
+            <span className={clsx(styles.badge, styles.effort)}>
+              {task.effort}
+            </span>
+          )}
         </div>
       </div>
     </motion.div>

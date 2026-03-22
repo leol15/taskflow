@@ -1,17 +1,21 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Plus } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTasks } from "../../context/TaskContext";
 import { useGlobalShortcut } from "../../hooks/useGlobalShortcut";
-import { Input } from "../ui/Input";
+import { Effort, Priority, Urgency } from "../../types/task";
 import { Button } from "../ui/Button";
-import { Plus } from "lucide-react";
+import { Input } from "../ui/Input";
 import styles from "./TaskCapture.module.scss";
 
 export function TaskCapture() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const [priority, setPriority] = useState<Priority>("P4");
+  const [effort, setEffort] = useState<Effort>("unknown");
+  const [urgency, setUrgency] = useState<Urgency>("Eventually");
   const { addTask } = useTasks();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -22,14 +26,18 @@ export function TaskCapture() {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 100);
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTitle("");
+      setPriority("P4");
+      setEffort("unknown");
+      setUrgency("Eventually");
     }
   }, [isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
-    addTask(title.trim(), "P4"); // Default priority
+    addTask(title.trim(), priority, effort, urgency);
     setIsOpen(false);
   };
 
@@ -63,6 +71,35 @@ export function TaskCapture() {
                   icon={<Plus size={20} />}
                   className={styles.inputOverrides}
                 />
+                <div className={styles.attributes}>
+                  <div className={styles.attributeGroup}>
+                    <label>Priority</label>
+                    <select value={priority} onChange={e => setPriority(e.target.value as Priority)}>
+                      <option value="P1">P1 - Critical</option>
+                      <option value="P2">P2 - High</option>
+                      <option value="P3">P3 - Normal</option>
+                      <option value="P4">P4 - Low</option>
+                    </select>
+                  </div>
+                  <div className={styles.attributeGroup}>
+                    <label>Effort</label>
+                    <select value={effort} onChange={e => setEffort(e.target.value as Effort)}>
+                      <option value="<10 min">&lt;10 min</option>
+                      <option value="30 min">30 min</option>
+                      <option value="2 hours">2 hours</option>
+                      <option value="unknown">unknown</option>
+                    </select>
+                  </div>
+                  <div className={styles.attributeGroup}>
+                    <label>Urgency</label>
+                    <select value={urgency} onChange={e => setUrgency(e.target.value as Urgency)}>
+                      <option value="Immediate">Immediate</option>
+                      <option value="Today">Today</option>
+                      <option value="This Week">This Week</option>
+                      <option value="Eventually">Eventually</option>
+                    </select>
+                  </div>
+                </div>
                 <div className={styles.footer}>
                   <span className={styles.footerHint}>Press <kbd>Enter</kbd> to save, <kbd>Esc</kbd> to dismiss</span>
                   <Button type="submit" size="sm" variant="primary">Save Task</Button>
