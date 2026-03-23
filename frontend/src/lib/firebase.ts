@@ -2,11 +2,6 @@
 // Firebase is initialised lazily from environment variables.
 // These are set in .env.local for local dev and in GitHub Actions secrets for production.
 //
-// ⚠️  ACTION REQUIRED before Phase 2:
-//    1. Create a Firebase project at https://console.firebase.google.com
-//    2. Enable Auth (Google + Email magic link) and create a Firestore DB
-//    3. Register a web app and copy the config values into .env.local
-//
 // Required .env.local keys:
 //   NEXT_PUBLIC_FIREBASE_API_KEY
 //   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
@@ -15,9 +10,9 @@
 //   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
 //   NEXT_PUBLIC_FIREBASE_APP_ID
 
-import { initializeApp, getApps, FirebaseApp } from "firebase/app";
-import { getAuth, Auth } from "firebase/auth";
-import { getFirestore, Firestore } from "firebase/firestore";
+import { FirebaseApp, getApps, initializeApp } from "firebase/app";
+import { Auth, getAuth } from "firebase/auth";
+import { Firestore, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,

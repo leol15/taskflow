@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertCircle, CheckCircle2, Cloud, CloudOff, RefreshCw } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { AuthSheet } from "../features/AuthSheet";
 import styles from "./SyncBadge.module.scss";
@@ -11,11 +11,21 @@ export function SyncBadge() {
     useAuth();
   const [showMenu, setShowMenu] = useState(false);
   const [showAuthSheet, setShowAuthSheet] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (showMenu && containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showMenu]);
 
   if (!firebaseConfigured) return null;
 
   const isSignedIn = !!user;
-  const isConnected = isSignedIn && !isDisconnected;
 
   function getStatusIcon() {
     if (!isSignedIn || isDisconnected) {
@@ -53,7 +63,7 @@ export function SyncBadge() {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={containerRef}>
       <button
         className={`${styles.badge} ${getBadgeModifier()}`}
         onClick={() => setShowMenu((v) => !v)}
@@ -66,7 +76,6 @@ export function SyncBadge() {
 
       {showMenu && (
         <>
-          <div className={styles.menuBackdrop} onClick={() => setShowMenu(false)} />
           <div className={styles.menu}>
             {!isSignedIn ? (
               <>
