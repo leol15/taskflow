@@ -10,6 +10,8 @@ interface TaskContextType {
   toggleTask: (id: string) => void;
   deleteTask: (id: string) => void;
   clearAllTasks: () => void;
+  /** Overwrite the full task list from a sync operation. Does not re-trigger sync. */
+  setTasksFromSync: (tasks: Task[]) => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -88,8 +90,12 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     setTasks([]);
   };
 
+  const setTasksFromSync = (newTasks: Task[]) => {
+    setTasks(newTasks);
+  };
+
   return (
-    <TaskContext.Provider value={{ tasks, addTask, updateTask, toggleTask, deleteTask, clearAllTasks }}>
+    <TaskContext.Provider value={{ tasks, addTask, updateTask, toggleTask, deleteTask, clearAllTasks, setTasksFromSync }}>
       {children}
     </TaskContext.Provider>
   );

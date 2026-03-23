@@ -2,12 +2,16 @@
 
 import { TaskList } from "../components/features/TaskList";
 import { TaskCapture } from "../components/features/TaskCapture";
+import { SyncBadge } from "../components/ui/SyncBadge";
+import { ConflictToastWrapper } from "../components/features/ConflictToast";
 import styles from "./page.module.scss";
 import { CheckCircle2 } from "lucide-react";
 import { useTasks } from "../context/TaskContext";
+import { useSync } from "../hooks/useSync";
 
 export default function Home() {
   const { tasks } = useTasks();
+  const { conflictInfo, keepMyVersions, clearConflict } = useSync();
   const hasTasks = tasks.length > 0;
 
   return (
@@ -20,6 +24,9 @@ export default function Home() {
           <h1 className={styles.title}>TaskFlow</h1>
         </div>
         {!hasTasks && <p className={styles.subtitle}>Capture. Organize. Prioritize.</p>}
+        <div className={styles.headerActions}>
+          <SyncBadge />
+        </div>
       </header>
 
       <div className={`${styles.container} ${hasTasks ? styles.hasTasks : ""}`}>
@@ -29,6 +36,13 @@ export default function Home() {
       </div>
 
       <TaskCapture />
+
+      <ConflictToastWrapper
+        count={conflictInfo?.count ?? null}
+        onKeepMine={keepMyVersions}
+        onDismiss={clearConflict}
+      />
     </main>
   );
 }
+

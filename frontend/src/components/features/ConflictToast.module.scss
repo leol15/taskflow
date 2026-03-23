@@ -1,0 +1,109 @@
+// ── Fixed position wrapper ────────────────────────────────────────────────────
+
+.wrapper {
+  position: fixed;
+  bottom: 80px; // sit above the TaskCapture hint bar
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  pointer-events: none; // wrapper itself doesn't block clicks
+}
+
+// ── Toast card ────────────────────────────────────────────────────────────────
+
+.toast {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  min-width: 300px;
+  max-width: 420px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  pointer-events: all;
+}
+
+// ── Cloud icon ────────────────────────────────────────────────────────────────
+
+.icon {
+  color: var(--info);
+  flex-shrink: 0;
+}
+
+// ── Message ───────────────────────────────────────────────────────────────────
+
+.message {
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+}
+
+// ── Keep my version button ────────────────────────────────────────────────────
+
+.keepBtn {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+
+  &:hover {
+    background: color-mix(in srgb, var(--accent-primary) 18%, transparent);
+  }
+}
+
+// ── Dismiss button ────────────────────────────────────────────────────────────
+
+.dismissBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--text-tertiary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+}
+
+// ── Auto-dismiss progress bar ─────────────────────────────────────────────────
+
+.progressTrack {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border-light);
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--info);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  // width is animated from JS (100% → 0% over AUTO_DISMISS_MS)
+}

@@ -15,4 +15,8 @@ export interface Task {
   updatedAt?: string; // ISO string
   completedAt?: string; // ISO string
   dueDate?: string; // ISO string, optional for v1
+
+  // Sync fields (optional, backwards-compatible)
+  syncedAt?: string;  // ISO string — last confirmed cloud sync
+  deviceId?: string;  // last device to write this task
 }

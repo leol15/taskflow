@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 import { TaskProvider } from "../context/TaskContext";
+import { AuthProvider } from "../context/AuthContext";
 
 export default function RootLayout({
   children,
@@ -27,7 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${outfit.variable}`}>
-        <TaskProvider>{children}</TaskProvider>
+        <AuthProvider>
+          <TaskProvider>{children}</TaskProvider>
+        </AuthProvider>
       </body>
     </html>
   );
