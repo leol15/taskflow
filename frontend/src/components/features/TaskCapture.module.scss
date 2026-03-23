@@ -1,3 +1,5 @@
+@use "../../app/variables" as g;
+
 .hint {
   display: flex;
   align-items: center;
@@ -15,6 +17,11 @@
   &:hover {
     color: var(--text-primary);
     border-color: var(--text-primary);
+  }
+
+  // On mobile, the FAB replaces the keyboard shortcut hint
+  @media (max-width: g.$bp-mobile) {
+    display: none;
   }
 }
 
@@ -44,6 +51,11 @@
   align-items: flex-start;
   justify-content: center;
   padding-top: 15vh;
+
+  @media (max-width: g.$bp-mobile) {
+    align-items: flex-end;
+    padding-top: 0;
+  }
 }
 
 .modal {
@@ -55,6 +67,15 @@
   border: 1px solid var(--border-medium);
   overflow: hidden;
   margin: 0 16px;
+
+  @media (max-width: g.$bp-mobile) {
+    max-width: 100%;
+    margin: 0;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    border-bottom: none;
+    max-height: 92dvh;
+    overflow-y: auto;
+  }
 }
 
 .formContainer {
@@ -95,6 +116,10 @@
   align-items: center;
   gap: 6px;
 
+  @media (max-width: g.$bp-mobile) {
+    display: none; // hide keyboard shortcut hints on touch devices
+  }
+
   kbd {
     background: var(--bg-elevated);
     border: 1px solid var(--border-medium);
@@ -109,4 +134,38 @@
 .attributesLayout {
   padding: 0 16px 16px;
   background: transparent;
+}
+
+// ── Mobile FAB ────────────────────────────────────────────────────────────────
+
+// Visible only on mobile – a floating "+" button anchored bottom-right
+.fab {
+  display: none;
+
+  @media (max-width: g.$bp-mobile) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 900;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+    transition: background var(--transition-fast), transform var(--transition-bounce);
+
+    &:hover {
+      background: var(--accent-hover);
+    }
+
+    &:active {
+      transform: scale(0.93);
+    }
+  }
 }

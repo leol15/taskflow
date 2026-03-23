@@ -122,7 +122,7 @@ export function TaskList() {
 
       {tasks.length === 0 ? (
         <div className={styles.emptyState}>
-          <p>No tasks yet. Press Cmd+K to capture one.</p>
+          <p>No tasks yet. Press <strong>Cmd+K</strong> or tap <strong>+</strong> to capture one.</p>
         </div>
       ) : activeTasks.length === 0 && completedTasks.length === 0 ? (
         <div className={styles.emptyState}>

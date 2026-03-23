@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useTasks } from "../context/TaskContext";
+import { Task } from "../types/task";
 import { fetchCloudTasks, pushCloudTasks } from "../utils/firestore";
 import { reconcile, restoreLocalVersions } from "../utils/reconcile";
-import { Task } from "../types/task";
 
 export interface ConflictInfo {
   count: number;
@@ -13,7 +13,7 @@ export interface ConflictInfo {
   preSyncSnapshot: Task[];
 }
 
-const DEBOUNCE_MS = 3000;
+const DEBOUNCE_MS = 5000;
 
 export function useSync() {
   const { user, isDisconnected, setSyncStatus } = useAuth();

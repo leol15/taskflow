@@ -1,3 +1,5 @@
+@use "../../app/variables" as g;
+
 .item {
   position: relative;
   display: flex;
@@ -29,6 +31,17 @@
       color-mix(in srgb, var(--category-color) 8%, var(--bg-elevated)) 0%,
       color-mix(in srgb, var(--importance-color) 8%, var(--bg-elevated)) 100%
     );
+  }
+
+  @media (max-width: g.$bp-mobile) {
+    padding: 12px;
+    gap: 10px;
+
+    &:hover {
+      // On mobile there's no hover; keep it subtle
+      transform: none;
+      box-shadow: 2px 2px 0px var(--importance-color);
+    }
   }
 }
 
@@ -63,6 +76,11 @@
       border-radius: 4px;
       box-shadow: 0 0 0 4px color-mix(in srgb, var(--category-color) 20%, transparent);
     }
+  }
+
+  @media (max-width: g.$bp-mobile) {
+    padding: 20px 14px;
+    margin: -20px -6px -20px -12px;
   }
 }
 
@@ -103,6 +121,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+
+  @media (max-width: g.$bp-mobile) {
+    gap: 6px;
+  }
 }
 
 .badge {

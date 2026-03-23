@@ -1,3 +1,5 @@
+@use "./variables" as g;
+
 .main {
   position: relative;
   min-height: 100vh;
@@ -9,6 +11,14 @@
 
   &.hasTasks {
     padding-top: 56px; // leave room for the docked header
+  }
+
+  @media (max-width: g.$bp-mobile) {
+    padding: 48px 12px;
+
+    &.hasTasks {
+      padding-top: 52px;
+    }
   }
 }
 
@@ -46,6 +56,10 @@
     z-index: 50;
     backdrop-filter: blur(8px);
     background: color-mix(in srgb, var(--bg-base) 85%, transparent);
+
+    @media (max-width: g.$bp-mobile) {
+      padding: 0 12px;
+    }
   }
 }
 
@@ -121,4 +135,9 @@
   padding: 40px;
   box-shadow: var(--shadow-md);
   position: relative;
+
+  @media (max-width: g.$bp-mobile) {
+    padding: 16px 12px;
+    border-radius: var(--radius-sm);
+  }
 }

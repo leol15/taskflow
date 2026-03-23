@@ -54,6 +54,15 @@ export function TaskCapture() {
         <span>to auto-capture workspace task</span>
       </div>
 
+      {/* Mobile FAB — hidden on desktop via CSS */}
+      <button
+        className={styles.fab}
+        onClick={() => setIsOpen(true)}
+        aria-label="Add new task"
+      >
+        <Plus size={26} />
+      </button>
+
       <AnimatePresence>
         {isOpen && (
           <div className={styles.overlay} onClick={() => setIsOpen(false)}>

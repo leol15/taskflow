@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Cloud, CloudOff, RefreshCw, AlertCircle, CheckCircle2 } from "lucide-react";
+import { AlertCircle, CheckCircle2, Cloud, CloudOff, RefreshCw } from "lucide-react";
+import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { AuthSheet } from "../features/AuthSheet";
 import styles from "./SyncBadge.module.scss";
@@ -38,9 +38,9 @@ export function SyncBadge() {
     if (isDisconnected) return "Disconnected";
     switch (syncStatus) {
       case "syncing": return "Syncing…";
-      case "synced":  return "Synced";
-      case "error":   return "Sync error";
-      default:        return "Local only";
+      case "synced": return "Synced";
+      case "error": return "Sync error";
+      default: return "Local only";
     }
   }
 

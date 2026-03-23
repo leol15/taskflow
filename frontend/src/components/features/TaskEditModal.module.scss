@@ -1,3 +1,5 @@
+@use "../../app/variables" as g;
+
 .overlay {
   position: fixed;
   top: 0;
@@ -11,6 +13,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: g.$bp-mobile) {
+    align-items: flex-end;
+  }
 }
 
 .modal {
@@ -24,6 +30,15 @@
   margin: 0 16px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: g.$bp-mobile) {
+    max-width: 100%;
+    margin: 0;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    border-bottom: none;
+    max-height: 92dvh;
+    overflow-y: auto;
+  }
 }
 
 .formContainer {

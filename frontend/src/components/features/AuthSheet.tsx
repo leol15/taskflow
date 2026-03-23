@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Cloud, Mail, Loader2 } from "lucide-react";
+import { Cloud, Loader2, Mail, X } from "lucide-react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Button } from "../ui/Button";
 import styles from "./AuthSheet.module.scss";
@@ -111,10 +111,10 @@ export function AuthSheet({ isOpen, onClose }: AuthSheetProps) {
                     ) : (
                       // Google "G" logo as inline SVG (no external asset needed)
                       <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true">
-                        <path fill="#4285F4" d="M45.3 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12a10.2 10.2 0 0 1-4.4 6.7v5.6h7.1c4.2-3.9 6.6-9.6 6.6-16.3z"/>
-                        <path fill="#34A853" d="M24 46c6 0 11-2 14.7-5.3l-7.1-5.6c-2 1.3-4.5 2.1-7.6 2.1-5.8 0-10.8-3.9-12.5-9.2H4.1v5.8A22 22 0 0 0 24 46z"/>
-                        <path fill="#FBBC04" d="M11.5 28c-.4-1.3-.7-2.6-.7-4s.3-2.7.7-4v-5.8H4.1A22 22 0 0 0 2 24c0 3.6.9 7 2.1 10l7.4-6z"/>
-                        <path fill="#EA4335" d="M24 10.8c3.3 0 6.2 1.1 8.5 3.3l6.4-6.4C34.9 4.1 29.9 2 24 2A22 22 0 0 0 4.1 14l7.4 5.8C13.2 14.7 18.2 10.8 24 10.8z"/>
+                        <path fill="#4285F4" d="M45.3 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12a10.2 10.2 0 0 1-4.4 6.7v5.6h7.1c4.2-3.9 6.6-9.6 6.6-16.3z" />
+                        <path fill="#34A853" d="M24 46c6 0 11-2 14.7-5.3l-7.1-5.6c-2 1.3-4.5 2.1-7.6 2.1-5.8 0-10.8-3.9-12.5-9.2H4.1v5.8A22 22 0 0 0 24 46z" />
+                        <path fill="#FBBC04" d="M11.5 28c-.4-1.3-.7-2.6-.7-4s.3-2.7.7-4v-5.8H4.1A22 22 0 0 0 2 24c0 3.6.9 7 2.1 10l7.4-6z" />
+                        <path fill="#EA4335" d="M24 10.8c3.3 0 6.2 1.1 8.5 3.3l6.4-6.4C34.9 4.1 29.9 2 24 2A22 22 0 0 0 4.1 14l7.4 5.8C13.2 14.7 18.2 10.8 24 10.8z" />
                       </svg>
                     )}
                     Continue with Google
