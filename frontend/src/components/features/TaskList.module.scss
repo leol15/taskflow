@@ -264,3 +264,77 @@
   color: var(--text-secondary);
   margin: 0;
 }
+
+.archiveSection {
+  margin-top: 16px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 24px;
+}
+
+.archiveHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 0;
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--text-secondary);
+  }
+}
+
+.archiveTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.archiveCount {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--bg-hover);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.archiveActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.clearArchiveBtn {
+  background: transparent;
+  border: none;
+  color: var(--danger);
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+}
+
+.archiveList {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0.6;
+  filter: grayscale(0.5);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    opacity: 0.8;
+    filter: grayscale(0.2);
+  }
+}

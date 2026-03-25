@@ -7,11 +7,13 @@ import { TaskItem } from "./TaskItem";
 import { Task } from "../../types/task";
 import { TaskEditModal } from "./TaskEditModal";
 import { sortTasks, SortOption } from "../../utils/sort";
+import { ChevronDown, ChevronRight, Archive } from "lucide-react";
 import styles from "./TaskList.module.scss";
 
 export function TaskList() {
-  const { tasks, clearAllTasks } = useTasks();
+  const { tasks, archivedTasks, clearAllTasks, clearArchive } = useTasks();
   const [editingTaskId, setEditingTaskId] = React.useState<string | null>(null);
+  const [showArchive, setShowArchive] = React.useState(false);
 
   const [filterCategory, setFilterCategory] = React.useState<string>("All");
   const [filterImportance, setFilterImportance] = React.useState<string>("All");
@@ -150,6 +152,46 @@ export function TaskList() {
                   ))}
                 </AnimatePresence>
               </div>
+            </div>
+          )}
+
+          {archivedTasks.length > 0 && (
+            <div className={styles.archiveSection}>
+              <div 
+                className={styles.archiveHeader}
+                onClick={() => setShowArchive(!showArchive)}
+              >
+                <div className={styles.archiveTitle}>
+                  {showArchive ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  <Archive size={14} />
+                  <span>Archive</span>
+                  <span className={styles.archiveCount}>{archivedTasks.length}</span>
+                </div>
+                
+                {showArchive && (
+                  <button 
+                    className={styles.clearArchiveBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (window.confirm("Clear all archived tasks? This is local-only and cannot be undone.")) {
+                        clearArchive();
+                      }
+                    }}
+                  >
+                    Clear Archive
+                  </button>
+                )}
+              </div>
+
+              {showArchive && (
+                <div className={styles.archiveList}>
+                  <AnimatePresence>
+                    {archivedTasks.map((task) => (
+                      <TaskItem key={task.id} task={task} />
+                    ))}
+                  </AnimatePresence>
+                </div>
+              )}
             </div>
           )}
         </>
