@@ -17,9 +17,12 @@
   padding: 12px 16px;
 
   @media (max-width: g.$bp-mobile) {
-    padding: 10px 10px;
-    gap: 8px;
+    padding: 0;
+    gap: 0; // Each row handles its own internal spacing/padding
     border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    overflow: visible; // Allow elements to overflow container if needed (though children should handle it)
   }
 }
 
@@ -30,8 +33,14 @@
   flex-wrap: wrap;
 
   @media (max-width: g.$bp-mobile) {
-    // Allow natural wrapping but with slightly smaller gap
     gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 16px; // Align with edge padding
+    // Hide scrollbar but keep swipe gesture
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
   }
 }
 
@@ -55,6 +64,14 @@
     border-color: var(--text-primary);
     transform: translateY(-1px);
     box-shadow: 2px 2px 0px var(--border-medium);
+
+    @media (max-width: g.$bp-mobile) {
+      transform: none;
+      box-shadow: none;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      border-color: var(--border-medium);
+    }
   }
 
   &.active {
@@ -91,6 +108,17 @@
   }
 }
 
+.mainFiltersGroups {
+  @media (max-width: g.$bp-mobile) {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    margin-top: 4px;
+  }
+}
+
 .filtersPrimary {
   display: flex;
   gap: 16px;
@@ -99,6 +127,8 @@
 
   @media (max-width: g.$bp-mobile) {
     gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px 16px; // Consistent horizontal padding
   }
 
   .clearAllBtn {
@@ -134,7 +164,9 @@
 
   @media (max-width: g.$bp-mobile) {
     gap: 10px;
-    padding-top: 8px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border-top: 1px solid var(--border-light);
   }
 }
 
@@ -175,6 +207,11 @@
   &:hover {
     background: var(--bg-hover);
     color: var(--text-primary);
+
+    @media (max-width: g.$bp-mobile) {
+      background: transparent;
+      color: var(--text-secondary);
+    }
   }
 
   &.active {

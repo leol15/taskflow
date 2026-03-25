@@ -53,8 +53,8 @@
   padding-top: 15vh;
 
   @media (max-width: g.$bp-mobile) {
-    align-items: flex-end;
-    padding-top: 0;
+    align-items: flex-start;
+    padding-top: 10vh;
   }
 }
 
@@ -69,11 +69,11 @@
   margin: 0 16px;
 
   @media (max-width: g.$bp-mobile) {
-    max-width: 100%;
-    margin: 0;
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
-    border-bottom: none;
-    max-height: 92dvh;
+    max-width: calc(100% - 24px);
+    margin: 0 12px;
+    border-radius: var(--radius-md);
+    border-bottom: 1px solid var(--border-medium);
+    max-height: 85dvh;
     overflow-y: auto;
   }
 }

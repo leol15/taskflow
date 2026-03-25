@@ -14,10 +14,35 @@ import styles from "./TaskCapture.module.scss";
 export function TaskCapture() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState<Category>("todo");
-  const [importance, setImportance] = useState<Importance>("can do");
-  const [effort, setEffort] = useState<Effort>("unknown");
-  const [urgency, setUrgency] = useState<Urgency>("Eventually");
+  // Track last successfully created task attributes
+  const [lastAttributes, setLastAttributes] = useState<{
+    category: Category;
+    importance: Importance;
+    effort: Effort;
+    urgency: Urgency;
+  }>(() => {
+    if (typeof localStorage !== "undefined") {
+      const saved = localStorage.getItem("taskflow_last_attributes");
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch {
+        }
+      }
+    }
+    return {
+      category: "todo",
+      importance: "can do",
+      effort: "unknown",
+      urgency: "Eventually",
+    };
+  });
+
+  const [category, setCategory] = useState<Category>(lastAttributes.category);
+  const [importance, setImportance] = useState<Importance>(lastAttributes.importance);
+  const [effort, setEffort] = useState<Effort>(lastAttributes.effort);
+  const [urgency, setUrgency] = useState<Urgency>(lastAttributes.urgency);
+  
   const { addTask } = useTasks();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -28,19 +53,29 @@ export function TaskCapture() {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 100);
     } else {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      /* eslint-disable react-hooks/set-state-in-effect */
       setTitle("");
-      setCategory("todo");
-      setImportance("can do");
-      setEffort("unknown");
-      setUrgency("Eventually");
+      // Revert attributes to last successfully created task values if they were changed but not saved
+      setCategory(lastAttributes.category);
+      setImportance(lastAttributes.importance);
+      setEffort(lastAttributes.effort);
+      setUrgency(lastAttributes.urgency);
+      /* eslint-enable react-hooks/set-state-in-effect */
     }
-  }, [isOpen]);
+  }, [isOpen, lastAttributes]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
+    
+    // Save task
     addTask(title.trim(), category, importance, effort, urgency);
+    
+    // Record these as the new "last used" attributes
+    const attributes = { category, importance, effort, urgency };
+    setLastAttributes(attributes);
+    localStorage.setItem("taskflow_last_attributes", JSON.stringify(attributes));
+    
     setIsOpen(false);
   };
 

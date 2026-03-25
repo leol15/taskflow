@@ -42,81 +42,83 @@ export function TaskList() {
     <div className={styles.container}>
       {tasks.length > 0 && (
         <div className={styles.filtersContainer}>
-          <div className={styles.filtersPrimary}>
-            <div className={styles.categoryFilters}>
-              {["All", "todo", "idea", "reminder", "note", "reflection"].map(c => (
-                <button 
-                  key={c} 
-                  className={`${styles.categoryBtn} ${c !== "All" ? styles[c] : ''} ${filterCategory === c ? styles.active : ''}`} 
-                  onClick={() => setFilterCategory(c)}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-
-            <div className={styles.filterGroup}>
-              <span className={styles.filterLabel}>Sort:</span>
-              <div className={styles.buttonGroup}>
-                {[
-                  { value: "prioritized", label: "Priority" },
-                  { value: "createdAt", label: "Created" },
-                  { value: "updatedAt", label: "Updated" },
-                ].map(s => (
-                  <button key={s.value} className={`${styles.filterBtn} ${sortOption === s.value ? styles.active : ''}`} onClick={() => setSortOption(s.value as SortOption)}>{s.label}</button>
-                ))}
-              </div>
-            </div>
-
-            <button 
-              className={`${styles.filterBtn} ${styles.advancedToggle} ${showAdvancedFilters ? styles.active : ''}`}
-              onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-            >
-              {showAdvancedFilters ? "Hide Advanced" : "Advanced Filters"}
-            </button>
-
-            <button 
-              className={styles.clearAllBtn}
-              onClick={() => {
-                if (window.confirm("Are you sure you want to delete all tasks? This action cannot be undone.")) {
-                  clearAllTasks();
-                }
-              }}
-            >
-              Clear All
-            </button>
+          <div className={styles.categoryFilters}>
+            {["All", "todo", "idea", "reminder", "note", "reflection"].map(c => (
+              <button 
+                key={c} 
+                className={`${styles.categoryBtn} ${c !== "All" ? styles[c] : ''} ${filterCategory === c ? styles.active : ''}`} 
+                onClick={() => setFilterCategory(c)}
+              >
+                {c}
+              </button>
+            ))}
           </div>
 
-          {showAdvancedFilters && (
-            <div className={styles.filtersAdvanced}>
+          <div className={styles.mainFiltersGroups}>
+            <div className={styles.filtersPrimary}>
               <div className={styles.filterGroup}>
-                <span className={styles.filterLabel}>Importance:</span>
+                <span className={styles.filterLabel}>Sort:</span>
                 <div className={styles.buttonGroup}>
-                  {["All", "must do", "should do", "can do"].map(i => (
-                    <button key={i} className={`${styles.filterBtn} ${filterImportance === i ? styles.active : ''}`} onClick={() => setFilterImportance(i)}>{i}</button>
+                  {[
+                    { value: "prioritized", label: "Priority" },
+                    { value: "createdAt", label: "Created" },
+                    { value: "updatedAt", label: "Updated" },
+                  ].map(s => (
+                    <button key={s.value} className={`${styles.filterBtn} ${sortOption === s.value ? styles.active : ''}`} onClick={() => setSortOption(s.value as SortOption)}>{s.label}</button>
                   ))}
                 </div>
               </div>
 
-              <div className={styles.filterGroup}>
-                <span className={styles.filterLabel}>Effort:</span>
-                <div className={styles.buttonGroup}>
-                  {["All", "<10 min", "30 min", "2 hours", "unknown"].map(e => (
-                    <button key={e} className={`${styles.filterBtn} ${filterEffort === e ? styles.active : ''}`} onClick={() => setFilterEffort(e)}>{e}</button>
-                  ))}
-                </div>
-              </div>
+              <button 
+                className={`${styles.filterBtn} ${styles.advancedToggle} ${showAdvancedFilters ? styles.active : ''}`}
+                onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+              >
+                {showAdvancedFilters ? "Hide Advanced" : "Advanced Filters"}
+              </button>
 
-              <div className={styles.filterGroup}>
-                <span className={styles.filterLabel}>Urgency:</span>
-                <div className={styles.buttonGroup}>
-                  {["All", "Immediate", "Today", "This Week", "Eventually"].map(u => (
-                    <button key={u} className={`${styles.filterBtn} ${filterUrgency === u ? styles.active : ''}`} onClick={() => setFilterUrgency(u)}>{u}</button>
-                  ))}
-                </div>
-              </div>
+              <button 
+                className={styles.clearAllBtn}
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to delete all tasks? This action cannot be undone.")) {
+                    clearAllTasks();
+                  }
+                }}
+              >
+                Clear All
+              </button>
             </div>
-          )}
+
+            {showAdvancedFilters && (
+              <div className={styles.filtersAdvanced}>
+                <div className={styles.filterGroup}>
+                  <span className={styles.filterLabel}>Importance:</span>
+                  <div className={styles.buttonGroup}>
+                    {["All", "must do", "should do", "can do"].map(i => (
+                      <button key={i} className={`${styles.filterBtn} ${filterImportance === i ? styles.active : ''}`} onClick={() => setFilterImportance(i)}>{i}</button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={styles.filterGroup}>
+                  <span className={styles.filterLabel}>Effort:</span>
+                  <div className={styles.buttonGroup}>
+                    {["All", "<10 min", "30 min", "2 hours", "unknown"].map(e => (
+                      <button key={e} className={`${styles.filterBtn} ${filterEffort === e ? styles.active : ''}`} onClick={() => setFilterEffort(e)}>{e}</button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={styles.filterGroup}>
+                  <span className={styles.filterLabel}>Urgency:</span>
+                  <div className={styles.buttonGroup}>
+                    {["All", "Immediate", "Today", "This Week", "Eventually"].map(u => (
+                      <button key={u} className={`${styles.filterBtn} ${filterUrgency === u ? styles.active : ''}`} onClick={() => setFilterUrgency(u)}>{u}</button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       )}
 

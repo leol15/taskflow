@@ -14,7 +14,8 @@
   }
 
   @media (max-width: g.$bp-mobile) {
-    padding: 48px 12px;
+    // Edge-to-edge: no horizontal gutter, maximise screen real estate
+    padding: 48px 0;
 
     &.hasTasks {
       padding-top: 52px;
@@ -137,7 +138,12 @@
   position: relative;
 
   @media (max-width: g.$bp-mobile) {
-    padding: 16px 12px;
-    border-radius: var(--radius-sm);
+    // No card chrome on mobile — flat, full-width, edge-to-edge layout
+    padding: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+    background: transparent;
   }
 }

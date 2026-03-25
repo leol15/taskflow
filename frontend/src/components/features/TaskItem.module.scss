@@ -36,11 +36,20 @@
   @media (max-width: g.$bp-mobile) {
     padding: 12px;
     gap: 10px;
+    border-radius: 0;
+    // border-left: none;
+    // border-right: none;
 
     &:hover {
-      // On mobile there's no hover; keep it subtle
+      // No hover lift on touch — interactions are tap only
       transform: none;
       box-shadow: 2px 2px 0px var(--importance-color);
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--category-color) 4%, var(--bg-elevated)) 0%,
+        color-mix(in srgb, var(--importance-color) 4%, var(--bg-elevated)) 100%
+      );
+      border-color: var(--border-medium);
     }
   }
 }
@@ -81,6 +90,14 @@
   @media (max-width: g.$bp-mobile) {
     padding: 20px 14px;
     margin: -20px -6px -20px -12px;
+
+    &:hover {
+      background: color-mix(in srgb, var(--category-color) 5%, transparent);
+      .checkbox {
+        transform: none;
+        box-shadow: none;
+      }
+    }
   }
 }
 
